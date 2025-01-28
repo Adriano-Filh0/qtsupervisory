@@ -8,6 +8,8 @@ class Plotter : public QWidget
 public:
     explicit Plotter(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event);
+    int x;
+    float y;
 signals:
 };
 

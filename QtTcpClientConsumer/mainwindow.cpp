@@ -20,46 +20,20 @@ void MainWindow::tcpConnect(){
     socket->connectToHost("127.0.0.1",1234);
     if(socket->waitForConnected(3000)){
         qDebug() << "Connected";
+
     }
     else{
         qDebug() << "Disconnected";
+        ui->textBrowser_ip_list->setText(" ");
     }
 }
 
 void MainWindow::tcpDisconnect(){
     socket->disconnectFromHost();
     qDebug() << "Disconnected";
-
+    ui->textBrowser_ip_list->setText(" ");
 }
 
-QStringList MainWindow::getServerList()
-{
-    QStringList serverList;
-    socket->connectToHost("127.0.0.1", 1234);
-    if (!socket->waitForConnected(3000)) {
-        qDebug() << "Disconnected";
-        return serverList;// Retorna uma lista vazia se não conectar
-    }
-    // Enviar o pedido para obter a lista de servidores
-    socket->write("GET_SERVER_LIST\r\n");
-    socket->waitForBytesWritten();
-
-    // Espera a resposta do servidor
-    socket->waitForReadyRead();
-
-    // Lê a resposta do servidor
-    QByteArray response = socket->readAll();
-    qDebug() << "Resposta do servidor:" << response;
-
-    // Processar a resposta (assumindo que seja uma lista de servidores separada por vírgulas ou espaços)
-    serverList = QString(response).split(",");  // Se for por vírgula, separa os servidores
-    for (int i = 0; i < serverList.size(); ++i) {
-        serverList[i] = serverList[i].trimmed();  // Remove espaços em excesso
-    }
-
-    socket->disconnectFromHost();  // Desconecta do servidor após a comunicação
-    return serverList;
-}
 void MainWindow::getData(){
   QString str;
   QByteArray array;
@@ -82,6 +56,7 @@ void MainWindow::getData(){
           thetime = str.toLongLong(&ok);
           str = list.at(1);
           qDebug() << thetime << ": " << str;
+
         }
       }
     }
@@ -109,7 +84,6 @@ void MainWindow::on_pushButton_disconnect_clicked()
 
 void MainWindow::on_pushButton_update_clicked()
 {
-    ui->listWidget_servidores->addItems(getServerList());
-
+    ui->textBrowser_ip_list->setText("127.0.0.1");
 }
 

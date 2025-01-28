@@ -15,12 +15,12 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 #include "plotter.h"
@@ -31,23 +31,23 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QPushButton *pushButtonGet;
     Plotter *widget;
     QWidget *widget1;
     QGridLayout *gridLayout;
-    QLineEdit *lineEdit_servidor;
     QLabel *label_timings;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton_connect;
     QPushButton *pushButton_disconnect;
-    QLabel *label_timings_2;
-    QSlider *horizontalSlider;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButton_start;
     QPushButton *pushButton_stop;
+    QLineEdit *lineEdit_servidor;
+    QSlider *horizontalSlider;
+    QPushButton *pushButtonGet;
+    QLabel *label_timings_2;
     QLabel *label;
+    QTextBrowser *textBrowser_ip_list;
     QPushButton *pushButton_update;
-    QListWidget *listWidget_servidores;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -59,29 +59,21 @@ public:
         MainWindow->resize(605, 398);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName("centralWidget");
-        pushButtonGet = new QPushButton(centralWidget);
-        pushButtonGet->setObjectName("pushButtonGet");
-        pushButtonGet->setGeometry(QRect(10, 300, 101, 29));
         widget = new Plotter(centralWidget);
         widget->setObjectName("widget");
-        widget->setGeometry(QRect(260, 0, 341, 281));
+        widget->setGeometry(QRect(280, 10, 341, 281));
         widget1 = new QWidget(centralWidget);
         widget1->setObjectName("widget1");
-        widget1->setGeometry(QRect(0, 0, 258, 291));
+        widget1->setGeometry(QRect(1, 1, 273, 368));
         gridLayout = new QGridLayout(widget1);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName("gridLayout");
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        lineEdit_servidor = new QLineEdit(widget1);
-        lineEdit_servidor->setObjectName("lineEdit_servidor");
-
-        gridLayout->addWidget(lineEdit_servidor, 1, 0, 1, 3);
-
         label_timings = new QLabel(widget1);
         label_timings->setObjectName("label_timings");
 
-        gridLayout->addWidget(label_timings, 5, 0, 1, 1);
+        gridLayout->addWidget(label_timings, 6, 0, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
@@ -97,20 +89,7 @@ public:
         horizontalLayout->addWidget(pushButton_disconnect);
 
 
-        gridLayout->addLayout(horizontalLayout, 2, 0, 1, 4);
-
-        label_timings_2 = new QLabel(widget1);
-        label_timings_2->setObjectName("label_timings_2");
-
-        gridLayout->addWidget(label_timings_2, 0, 0, 1, 2);
-
-        horizontalSlider = new QSlider(widget1);
-        horizontalSlider->setObjectName("horizontalSlider");
-        horizontalSlider->setMinimum(1);
-        horizontalSlider->setMaximum(10);
-        horizontalSlider->setOrientation(Qt::Orientation::Horizontal);
-
-        gridLayout->addWidget(horizontalSlider, 5, 1, 1, 2);
+        gridLayout->addLayout(horizontalLayout, 2, 0, 1, 3);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
@@ -126,22 +105,45 @@ public:
         horizontalLayout_2->addWidget(pushButton_stop);
 
 
-        gridLayout->addLayout(horizontalLayout_2, 6, 0, 1, 4);
+        gridLayout->addLayout(horizontalLayout_2, 7, 0, 1, 3);
+
+        lineEdit_servidor = new QLineEdit(widget1);
+        lineEdit_servidor->setObjectName("lineEdit_servidor");
+
+        gridLayout->addWidget(lineEdit_servidor, 1, 0, 1, 3);
+
+        horizontalSlider = new QSlider(widget1);
+        horizontalSlider->setObjectName("horizontalSlider");
+        horizontalSlider->setMinimum(1);
+        horizontalSlider->setMaximum(10);
+        horizontalSlider->setOrientation(Qt::Orientation::Horizontal);
+
+        gridLayout->addWidget(horizontalSlider, 6, 1, 1, 2);
+
+        pushButtonGet = new QPushButton(widget1);
+        pushButtonGet->setObjectName("pushButtonGet");
+
+        gridLayout->addWidget(pushButtonGet, 8, 0, 1, 2);
+
+        label_timings_2 = new QLabel(widget1);
+        label_timings_2->setObjectName("label_timings_2");
+
+        gridLayout->addWidget(label_timings_2, 0, 0, 1, 2);
 
         label = new QLabel(widget1);
         label->setObjectName("label");
 
-        gridLayout->addWidget(label, 5, 3, 1, 1);
+        gridLayout->addWidget(label, 6, 3, 1, 1);
+
+        textBrowser_ip_list = new QTextBrowser(widget1);
+        textBrowser_ip_list->setObjectName("textBrowser_ip_list");
+
+        gridLayout->addWidget(textBrowser_ip_list, 3, 0, 2, 3);
 
         pushButton_update = new QPushButton(widget1);
         pushButton_update->setObjectName("pushButton_update");
 
-        gridLayout->addWidget(pushButton_update, 4, 2, 1, 2);
-
-        listWidget_servidores = new QListWidget(widget1);
-        listWidget_servidores->setObjectName("listWidget_servidores");
-
-        gridLayout->addWidget(listWidget_servidores, 3, 0, 1, 4);
+        gridLayout->addWidget(pushButton_update, 5, 2, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -163,14 +165,14 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        pushButtonGet->setText(QCoreApplication::translate("MainWindow", "getData", nullptr));
-        lineEdit_servidor->setText(QCoreApplication::translate("MainWindow", "127.0.0.1", nullptr));
         label_timings->setText(QCoreApplication::translate("MainWindow", "Timing(s)", nullptr));
         pushButton_connect->setText(QCoreApplication::translate("MainWindow", "Connect", nullptr));
         pushButton_disconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect", nullptr));
-        label_timings_2->setText(QCoreApplication::translate("MainWindow", "ip do servidor", nullptr));
         pushButton_start->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
         pushButton_stop->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
+        lineEdit_servidor->setText(QCoreApplication::translate("MainWindow", "127.0.0.1", nullptr));
+        pushButtonGet->setText(QCoreApplication::translate("MainWindow", "getData", nullptr));
+        label_timings_2->setText(QCoreApplication::translate("MainWindow", "ip do servidor", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p>0</p></body></html>", nullptr));
         pushButton_update->setText(QCoreApplication::translate("MainWindow", "update", nullptr));
     } // retranslateUi

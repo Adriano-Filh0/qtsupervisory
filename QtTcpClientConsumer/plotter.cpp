@@ -29,6 +29,6 @@ void Plotter::paintEvent(QPaintEvent *event) {
     pen.setColor(QColor(255, 180, 0));
     painter.setPen(pen);
 
-    //painter.drawLine(MainWindow::str);
+    painter.drawLine();
 }
 
