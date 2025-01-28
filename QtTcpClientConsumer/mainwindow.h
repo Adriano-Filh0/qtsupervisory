@@ -18,8 +18,17 @@ public:
   ~MainWindow();
   
   void tcpConnect();
+  void tcpDisconnect();
+  QStringList getServerList();
 public slots:
   void getData();
+private slots:
+    void on_pushButton_connect_clicked();
+
+    void on_pushButton_disconnect_clicked();
+
+    void on_pushButton_update_clicked();
+
 private:
   Ui::MainWindow *ui;
   QTcpSocket *socket;
